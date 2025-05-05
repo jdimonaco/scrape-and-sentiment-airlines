@@ -91,8 +91,8 @@ By examining passenger sentiment and feedback, the project aims to provide insig
 ▶️ **How to Run**
 
 Clone the repository:
-git clone https://github.com/your-username/airline-sentiment-nlp.git
-cd airline-sentiment-nlp
+git clone https://github.com/jdimonaco/scrape-and-sentiment-airlines.git
+cd scrape-and-sentiment-airlines
 
 Install requirements:
 pip install -r requirements.txt
