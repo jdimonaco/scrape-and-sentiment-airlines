@@ -39,7 +39,7 @@ def plot_sentiment_counts(df: pd.DataFrame) -> None:
     """Create a bar chart to visualise the sentiment distribution."""
     plt.figure(figsize=(8,6))
     df['Sentiment'].value_counts().plot(kind='bar')
-    plt.title('Sentiment Av.nalysis')
+    plt.title('Sentiment Analysis')
     plt.xlabel('Sentiment')
     plt.ylabel('Count')
     plt.show()  
