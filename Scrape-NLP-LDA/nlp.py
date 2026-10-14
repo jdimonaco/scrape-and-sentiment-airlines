@@ -23,13 +23,13 @@ def cleaning_stopwords(text: str) -> str:
 
 # Remove Punctuation
 def cleaning_punctuations(text: str) -> str:
-    """Remove punctuation characters from the text."""
-    return text.translate(str.maketrans('', '', string.punctuation))
+    """Remove punctuation characters from the text, including curly quotes such as ’ and “ ”."""
+    return text.translate(str.maketrans('', '', string.punctuation + "’‘“”"))
 
 # Remove Repeating Characters
 def cleaning_repeating_chars(text: str) -> str:
-    """Reduce repeated characters (e.g., 'soooo' becomes 'so')."""
-    return re.sub(r'(.)\1+', r'\1', text)
+    """Reduce characters repeated 3+ times (e.g., 'soooo' becomes 'so') while keeping normal double letters ('food', 'class')."""
+    return re.sub(r'(.)\1{2,}', r'\1', text)
 
 # Remove URLs
 def cleaning_urls(text: str) -> str:
@@ -177,8 +177,10 @@ def nlp_pipeline(df: pd.DataFrame, review_column: str = "Review_Text") -> pd.Dat
     processed_data = nlp_pipeline(data= data, review_column='Review_Text')
     """
     df["Clean_Review"] = df[review_column].apply(full_cleaning)
-    df["Subjectivity"] = df["Clean_Review"].apply(get_subjectivity)
-    df["Polarity"] = df["Clean_Review"].apply(get_polarity)
+    # Sentiment is scored on the original text: TextBlob needs words such as "not" and full word forms,
+    # which cleaning removes. The cleaned text is used for word clouds and topic modelling.
+    df["Subjectivity"] = df[review_column].apply(get_subjectivity)
+    df["Polarity"] = df[review_column].apply(get_polarity)
     df["Sentiment"] = df["Polarity"].apply(get_sentiment_label)
     return df
 
@@ -279,7 +281,8 @@ def analyse_delays(data):
 
     for index, row in df_negative.iterrows():
         airline = row['Airline Name']
-        review_text = row['Clean_Review'].lower()
+        # Use the original text: stemming turns 'cancelled' into 'cancel', so it would never match the keyword list.
+        review_text = cleaning_punctuations(str(row['Review_Text']).lower())
 
         keyword_count = sum(1 for keyword in delay_keywords if keyword in review_text.split())
 

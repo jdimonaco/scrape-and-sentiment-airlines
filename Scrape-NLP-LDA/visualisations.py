@@ -8,31 +8,21 @@ def generate_word_clouds(df_positive: pd.DataFrame, df_negative: pd.DataFrame, d
     """
     Generates and displays word clouds for positive, negative, and neutral reviews.
     """
-    positive_reviews = ' '.join(df_positive['Clean_Review'])
-    negative_reviews = ' '.join(df_negative['Clean_Review'])
-    neutral_reviews = ' '.join(df_neutral['Clean_Review'])
+    for label, df_group in [("Positive", df_positive), ("Negative", df_negative), ("Neutral", df_neutral)]:
+        text = ' '.join(df_group['Clean_Review'])
 
-    wordcloud_positive = WordCloud(width=800, height=500, random_state=42, max_font_size=100).generate(positive_reviews)
-    wordcloud_negative = WordCloud(width=800, height=500, random_state=42, max_font_size=100).generate(negative_reviews)
-    wordcloud_neutral = WordCloud(width=800, height=500, random_state=42, max_font_size=100).generate(neutral_reviews)
+        # Skip a group with no reviews: WordCloud raises an error on empty text
+        if not text.strip():
+            print(f"No {label.lower()} reviews - word cloud skipped.")
+            continue
 
-    plt.figure(figsize=(15, 8))
-    plt.imshow(wordcloud_positive, interpolation='bilinear')
-    plt.axis('off')
-    plt.title("Positive Reviews Word Cloud")
-    plt.show()
+        wordcloud = WordCloud(width=800, height=500, random_state=42, max_font_size=100).generate(text)
 
-    plt.figure(figsize=(15, 8))
-    plt.imshow(wordcloud_negative, interpolation='bilinear')
-    plt.axis('off')
-    plt.title("Negative Reviews Word Cloud")
-    plt.show()
-
-    plt.figure(figsize=(15, 8))
-    plt.imshow(wordcloud_neutral, interpolation='bilinear')
-    plt.axis('off')
-    plt.title("Neutral Reviews Word Cloud")
-    plt.show()
+        plt.figure(figsize=(15, 8))
+        plt.imshow(wordcloud, interpolation='bilinear')
+        plt.axis('off')
+        plt.title(f"{label} Reviews Word Cloud")
+        plt.show()
 
 # Plot Polarity vs Subjectivity
 def plot_polarity_subjectivity(df: pd.DataFrame) -> None:

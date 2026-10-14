@@ -28,4 +28,5 @@ def check_robots() -> str:
   text = response.text
   print(text)
 
-check_robots()
+if __name__ == "__main__":
+    check_robots()

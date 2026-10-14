@@ -64,7 +64,7 @@ def scrape_reviews_from_file(file_path: str, max_reviews: int = 20) -> List[List
     - Finds all <article> tags with class 'comp_media-review-rated'.
     - For each review (up to 'max_reviews'):
         - Extracts the title from <h2> tag, or return "No Title" if missing..
-        - Extracts the rating (first character from a <div> with class "rating-10", or "No Rating").
+        - Extracts the rating (the score before "/10" in the <div> with class "rating-10", or "No Rating").
         - Extract the review text from the <div> with class "text_content" (or "No Review").
     - Append the extracted data into a list.
 
@@ -94,7 +94,7 @@ def scrape_reviews_from_file(file_path: str, max_reviews: int = 20) -> List[List
             title = title_element.text if title_element else "No Title"
 
             rating_element = article.find("div", class_="rating-10")
-            rating = rating_element.text.strip()[0] if rating_element and rating_element.text.strip() else "No Rating"
+            rating = rating_element.text.strip().split("/")[0].strip() if rating_element and rating_element.text.strip() else "No Rating"
 
             review_text_element = article.find("div", class_="text_content")
             review_text = review_text_element.text if review_text_element else "No Review"

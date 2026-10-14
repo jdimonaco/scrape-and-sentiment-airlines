@@ -121,5 +121,10 @@ def load_reviews_df(file_path: str = "all_reviews.txt") -> pd.DataFrame:
     df = pd.read_csv("all_reviews.txt", sep="|", encoding="utf-8", skiprows=[1])
     df.columns = df.columns.str.strip()
 
+    # Strip the spaces left around each value by the " | " separator (e.g. " Not Verified "),
+    # so values match exactly in the verification analysis and in chart labels
+    for column in df.select_dtypes(include="object").columns:
+        df[column] = df[column].str.strip()
+
     return df
 
