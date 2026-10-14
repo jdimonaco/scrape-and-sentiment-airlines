@@ -67,7 +67,7 @@ def apply_lda_model(corpus, dictionary, num_topics=5):
     """
 
     lda_model = gensim.models.LdaMulticore(corpus, num_topics=num_topics,
-                                          id2word=dictionary, passes=10,
+                                          id2word=dictionary, passes=10, random_state=42,
                                           workers=2)
 
     topics = lda_model.show_topics(num_topics=num_topics, num_words=5, formatted=False)
