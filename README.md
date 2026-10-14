@@ -50,14 +50,14 @@ By examining passenger sentiment and feedback, the project aims to provide insig
 1. **Data Collection**
 - Web scraping using requests and BeautifulSoup to gather public reviews.
 
-3. **Data Processing**
-- Text cleaning: lowercasing, tokenisation, stopword removal, lemmatisation.
+2. **Data Processing**
+- Text cleaning: stopword and punctuation removal, tokenisation, stemming and lemmatisation (used for word clouds and topic modelling).
 
-- Sentiment analysis using TextBlob to classify reviews (positive, negative, neutral).
+- Sentiment analysis using TextBlob on the original review text to classify reviews (positive, negative, neutral).
 
 - Delay-related keyword extraction and frequency analysis.
 
-- Extraction of features like word count, polarity, and subjectivity.
+- Extraction of polarity and subjectivity scores.
 
 3. **Visualisations**
 - Word clouds of frequently used terms.
@@ -68,21 +68,28 @@ By examining passenger sentiment and feedback, the project aims to provide insig
 
 - Average rating and sentiment plots by airline.
 
-- Co-occurrence and LDA topic modelling to surface common complaint themes.
+- LDA topic modelling to surface common themes in the reviews.
 
 4. **Results & Insights**
-- Airlines with highest/lowest sentiment and delay mentions were identified.
 
-- Common issues include delays, cancellations, staff behaviour, and onboard services.
+Based on 60 reviews (the 10 reviews on each of 6 airlines' first review page):
 
-- Polarity and subjectivity scores highlighted nuanced passenger experiences.
+- 73% of reviews were positive and 27% negative.
 
-- LDA revealed clusters of complaints focused on check-in, boarding, and flight punctuality.
+- Qatar Airways had the highest average rating (8.4/10) and the most positive sentiment; Emirates and Lufthansa had the lowest average rating (3.7/10), and half of Emirates' reviews were negative.
+
+- Delay and cancellation keywords in negative reviews were most frequent for American Airlines (5 mentions), followed by Lufthansa (3) and Emirates (2).
+
+- 80% of reviews were verified trips; 44% of the negative reviews came from non-verified reviewers.
+
+- Topic modelling grouped the reviews around seat comfort and cabin class, onboard service, and boarding and service issues.
+
+- With 10 reviews per airline, these findings are indicative rather than conclusive.
 
 📊 **Future Work**
 - Integrate additional sources (e.g., TripAdvisor) to reduce bias and validate trends.
 
-- Upgrade sentiment analysis with transformer-based models (e.g., BERT, GPT) for more accurate tone detection (Belal et al., 2023).
+- Upgrade sentiment analysis with transformer-based models (e.g., BERT, GPT) for more accurate tone detection.
 
 - Automate scraping and NLP pipeline for near real-time monitoring.
 
@@ -94,7 +101,8 @@ Clone the repository:
 git clone https://github.com/jdimonaco/scrape-and-sentiment-airlines.git
 cd scrape-and-sentiment-airlines
 
-Install requirements:
+Move into the project folder and install requirements:
+cd Scrape-NLP-LDA
 pip install -r requirements.txt
 
 Run the full analysis pipeline:
