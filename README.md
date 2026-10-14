@@ -78,7 +78,7 @@ Based on 60 reviews (the 10 reviews on each of 6 airlines' first review page):
 
 - Qatar Airways had the highest average rating (8.4/10) and the most positive sentiment; Emirates and Lufthansa had the lowest average rating (3.7/10), and half of Emirates' reviews were negative.
 
-- Delay and cancellation keywords in negative reviews were most frequent for American Airlines (5 mentions), followed by Lufthansa (3) and Emirates (2).
+- Delay and cancellation keywords in negative reviews were most frequent for American Airlines (9 mentions), followed by Lufthansa (3) and Emirates (2).
 
 - 80% of reviews were verified trips; 44% of the negative reviews came from non-verified reviewers.
 
@@ -130,5 +130,5 @@ No attempt has been made to distribute or monetise any scraped data.
 
 All trademarks and content belong to their respective owners.
 
-If you are a data owner and have concerns about the use of your content, please contact the project maintainer to address the issue.
+If you are a data owner and have concerns about the use of your content, please contact the project maintainer to address the issu
 
