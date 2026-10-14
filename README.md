@@ -130,5 +130,5 @@ No attempt has been made to distribute or monetise any scraped data.
 
 All trademarks and content belong to their respective owners.
 
-If you are a data owner and have concerns about the use of your content, please contact the project maintainer to address the issu
+If you are a data owner and have concerns about the use of your content, please contact the project maintainer to address the issue.
 
