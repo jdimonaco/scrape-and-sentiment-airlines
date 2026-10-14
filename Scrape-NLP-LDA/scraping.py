@@ -24,6 +24,7 @@ def download_airline_reviews() -> None:
     - Check response:
       -  If request is successful (code == 200) → Saves the HTML content named after the formatted airline.
       -  If not successful → Prints error message and the status code.
+    - Wait 5 seconds before the next request, as the site's robots.txt asks (crawl delay).
 
     This refined approach targets individual review pages rather than extracting reviews from a single aggregated page,
     ensuring accurate data collection for each airline.
@@ -51,11 +52,14 @@ def download_airline_reviews() -> None:
         else:
             print(f"Failed to retrieve HTML for {airline} (Status code: {response.status_code})")
 
+        # Crawl delay: wait 5 seconds between requests to the website, as robots.txt asks
+        time.sleep(5)
+
 # Scrape reviews from the extracted file
 def scrape_reviews_from_file(file_path: str, max_reviews: int = 20) -> List[List[str]]:
     """
-   Extracts airline reviews from an HTML file.
-    A 5-second delay is introduced between iterations to comply with ethical web scraping practices.
+   Extracts airline reviews from a saved HTML file.
+    The file is read locally, so no request is sent to the website at this step.
 
     Steps
     -------
@@ -88,7 +92,6 @@ def scrape_reviews_from_file(file_path: str, max_reviews: int = 20) -> List[List
         articles = soup.find_all("article", class_="comp_media-review-rated")
 
         for article in articles[:max_reviews]:
-            time.sleep(5)
 
             title_element = article.find("h2")
             title = title_element.text if title_element else "No Title"

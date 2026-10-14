@@ -37,12 +37,12 @@ def task_consolidate_reviews() -> list:
 @task
 def task_save_reviews(reviews: list) -> None:
     """Task: Save the consolidated reviews to a text file."""
-    save_reviews_to_file(reviews, filename="all_reviews.txt")  # 'data/' prefix is handled in storage.py
+    save_reviews_to_file(reviews, filename="all_reviews.txt")
 
 @task
 def task_load_reviews_df() -> pd.DataFrame:
     """Task: Load the saved reviews into a DataFrame."""
-    return load_reviews_df("data/all_reviews.txt")
+    return load_reviews_df("all_reviews.txt")
 
 @task
 def task_apply_nlp(df: pd.DataFrame) -> pd.DataFrame:
@@ -120,7 +120,7 @@ def main_flow() -> None:
     task_save_reviews(reviews)
 
     # Step 4: Load reviews into a DataFrame
-    read_and_print_reviews("data/all_reviews.txt")
+    read_and_print_reviews("all_reviews.txt")
     df = task_load_reviews_df()
 
     # Step 5: Apply NLP and sentiment analysis

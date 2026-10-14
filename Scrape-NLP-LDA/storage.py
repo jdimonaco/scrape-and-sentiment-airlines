@@ -88,7 +88,7 @@ def read_and_print_reviews(filename: str = "all_reviews.txt"):
     -------------
     read_and_print_reviews(filename= 'all_reviews.txt')
     """
-  with open("all_reviews.txt", "r", encoding="utf-8") as file:
+  with open(filename, "r", encoding="utf-8") as file:
       content = file.read()
       print(content)
 
@@ -118,7 +118,7 @@ def load_reviews_df(file_path: str = "all_reviews.txt") -> pd.DataFrame:
     -------------
     data = load_reviews_df(file_path= 'all_reviews.txt')
     """
-    df = pd.read_csv("all_reviews.txt", sep="|", encoding="utf-8", skiprows=[1])
+    df = pd.read_csv(file_path, sep="|", encoding="utf-8", skiprows=[1])
     df.columns = df.columns.str.strip()
 
     # Strip the spaces left around each value by the " | " separator (e.g. " Not Verified "),

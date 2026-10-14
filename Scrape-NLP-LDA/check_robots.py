@@ -27,6 +27,7 @@ def check_robots() -> str:
   print(f"{response.status_code} {response.reason}")
   text = response.text
   print(text)
+  return text
 
 if __name__ == "__main__":
     check_robots()

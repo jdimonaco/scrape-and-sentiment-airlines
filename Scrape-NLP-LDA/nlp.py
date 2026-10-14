@@ -241,7 +241,7 @@ def analyse_verification_status(data: pd.DataFrame) -> None:
     
     negative_reviews = data[data['Sentiment'] == 'Negative']
     negative_non_verified = negative_reviews[negative_reviews['Verified'] == 'Not Verified']
-    negative_non_verified_percentage = round((len(negative_non_verified) / len(negative_reviews)) * 100, 1)
+    negative_non_verified_percentage = round((len(negative_non_verified) / len(negative_reviews)) * 100, 1) if len(negative_reviews) > 0 else 0
     
     print("\nNon-Verified Reviews Among Negative Sentiment:")
     print(f"Total Negative Reviews: {len(negative_reviews)}")
@@ -274,7 +274,8 @@ def analyse_delays(data):
     -------------
     analyse_data(data= data)
     """
-    delay_keywords = ["delay", "delayed", "late", "cancellation", "cancelled"]
+    delay_keywords = ["delay", "delays", "delayed", "delaying", "late",
+                      "cancel", "cancels", "cancelled", "canceled", "cancellation", "cancellations"]
     df_negative = data[data['Sentiment'] == 'Negative']
 
     airline_keyword_counts = {}
